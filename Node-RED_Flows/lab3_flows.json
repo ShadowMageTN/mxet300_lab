@@ -1,0 +1,175 @@
+[
+    {
+        "id": "7db26f160d3819d0",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "21ecb77e9a43cc1a",
+        "type": "file in",
+        "z": "7db26f160d3819d0",
+        "name": "",
+        "filename": "/tmp/heading.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "9e9029b8ea2c4a6e",
+                "06eed62ed0f724ca"
+            ]
+        ]
+    },
+    {
+        "id": "06eed62ed0f724ca",
+        "type": "ui_gauge",
+        "z": "7db26f160d3819d0",
+        "name": "",
+        "group": "be7abf7e9a1d4e7a",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "compass",
+        "title": "Compass",
+        "label": "Degrees",
+        "format": "{{value}}",
+        "min": "-180",
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 720,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9e9029b8ea2c4a6e",
+        "type": "debug",
+        "z": "7db26f160d3819d0",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "21ccdf469a61afc2",
+        "type": "inject",
+        "z": "7db26f160d3819d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": ".2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "21ecb77e9a43cc1a",
+                "fa5afd7f37f59aa9"
+            ]
+        ]
+    },
+    {
+        "id": "e563ce48eeec6069",
+        "type": "ui_text",
+        "z": "7db26f160d3819d0",
+        "group": "be7abf7e9a1d4e7a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Direction",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 600,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fa5afd7f37f59aa9",
+        "type": "file in",
+        "z": "7db26f160d3819d0",
+        "name": "",
+        "filename": "/tmp/direction.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "e563ce48eeec6069"
+            ]
+        ]
+    },
+    {
+        "id": "be7abf7e9a1d4e7a",
+        "type": "ui_group",
+        "name": "Compass Readings",
+        "tab": "29be84d156dcda78",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "29be84d156dcda78",
+        "type": "ui_tab",
+        "name": "Lab 3",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ce57e2e558e94492",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
