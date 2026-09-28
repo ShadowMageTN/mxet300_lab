@@ -18,8 +18,8 @@
 import board
 import digitalio
 import netifaces as ni
-import L1_ina as ina
-import L1_log as log
+import basics.L1_ina as ina
+import basics.L1_log as log
 from time import sleep
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
