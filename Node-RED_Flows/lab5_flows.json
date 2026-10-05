@@ -1,0 +1,331 @@
+[
+    {
+        "id": "70ad4750e7988bee",
+        "type": "tab",
+        "label": "Lab 5 - Encoders & Forward Kinematics",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6009659fb80d3995",
+        "type": "inject",
+        "z": "70ad4750e7988bee",
+        "name": "Read Speeds",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "0.2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "330e81e010cb5ea6",
+                "ddf1bf4b6502bd51",
+                "8717c49f526b6216",
+                "176ad2ef85a6be88"
+            ]
+        ]
+    },
+    {
+        "id": "330e81e010cb5ea6",
+        "type": "file in",
+        "z": "70ad4750e7988bee",
+        "name": "Read PDL",
+        "filename": "/tmp/PDL.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "2034334cf0b8352d"
+            ]
+        ]
+    },
+    {
+        "id": "ddf1bf4b6502bd51",
+        "type": "file in",
+        "z": "70ad4750e7988bee",
+        "name": "Read PDR",
+        "filename": "/tmp/PDR.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "e1c3393afd9a0e0b"
+            ]
+        ]
+    },
+    {
+        "id": "8717c49f526b6216",
+        "type": "file in",
+        "z": "70ad4750e7988bee",
+        "name": "Read xdot",
+        "filename": "/tmp/xdot.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "c3ebcd30b1dbde9e"
+            ]
+        ]
+    },
+    {
+        "id": "176ad2ef85a6be88",
+        "type": "file in",
+        "z": "70ad4750e7988bee",
+        "name": "Read thetadot",
+        "filename": "/tmp/thetadot.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "3b38312943d1759b"
+            ]
+        ]
+    },
+    {
+        "id": "c3ebcd30b1dbde9e",
+        "type": "ui_chart",
+        "z": "70ad4750e7988bee",
+        "name": "Forward Velocity",
+        "group": "791d9969f987210e",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "label": "Forward Velocity (m/s)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-0.5",
+        "ymax": "0.5",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b38312943d1759b",
+        "type": "ui_chart",
+        "z": "70ad4750e7988bee",
+        "name": "Angular Velocity",
+        "group": "791d9969f987210e",
+        "order": 2,
+        "width": 6,
+        "height": 5,
+        "label": "Angular Velocity (rad/s)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-3.5",
+        "ymax": "3.5",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2034334cf0b8352d",
+        "type": "ui_chart",
+        "z": "70ad4750e7988bee",
+        "name": "Left Wheel",
+        "group": "f3b3bf657129a632",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "label": "Left Wheel (rad/s)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-10",
+        "ymax": "10",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e1c3393afd9a0e0b",
+        "type": "ui_chart",
+        "z": "70ad4750e7988bee",
+        "name": "Right Wheel",
+        "group": "f3b3bf657129a632",
+        "order": 2,
+        "width": 6,
+        "height": 5,
+        "label": "Right Wheel (rad/s)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-10",
+        "ymax": "10",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "791d9969f987210e",
+        "type": "ui_group",
+        "name": "Chassis Speeds",
+        "tab": "1b85387d21c83093",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f3b3bf657129a632",
+        "type": "ui_group",
+        "name": "Wheel Speeds",
+        "tab": "1b85387d21c83093",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1b85387d21c83093",
+        "type": "ui_tab",
+        "name": "Lab 5 - Encoders & Forward Kinematics",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "49df5dd91caf4c26",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
