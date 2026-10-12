@@ -1,0 +1,443 @@
+[
+    {
+        "id": "6ab6000000000001",
+        "type": "tab",
+        "label": "Lab 6 - LIDAR",
+        "disabled": false,
+        "info": "Run L3_lidar.py on the same Pi. Uses classic node-red-dashboard nodes. Coordinates: +x forward, +y left."
+    },
+    {
+        "id": "6ab6000000000003",
+        "type": "comment",
+        "z": "6ab6000000000001",
+        "name": "Run L3_lidar.py first. +x forward; +y left.",
+        "info": "Distance: /tmp/lidar_distance.txt\nAngle: /tmp/lidar_angle.txt\nX: /tmp/lidar_x.txt\nY: /tmp/lidar_y.txt",
+        "x": 340,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6ab6000000000002",
+        "type": "inject",
+        "z": "6ab6000000000001",
+        "name": "Read every 0.5 s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 190,
+        "wires": [
+            [
+                "6ab6000000000010",
+                "6ab6000000000011",
+                "6ab6000000000012",
+                "6ab6000000000013"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000010",
+        "type": "file in",
+        "z": "6ab6000000000001",
+        "name": "Read distance",
+        "filename": "/tmp/lidar_distance.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "6ab6000000000020"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000020",
+        "type": "function",
+        "z": "6ab6000000000001",
+        "name": "Distance to number",
+        "func": "const text = String(msg.payload).trim();\nif (text === \"\") return null;\nconst value = Number(text);\nif (!Number.isFinite(value)) {\n    node.warn(\"Invalid number in \" + msg.filename);\n    return null;\n}\nmsg.payload = value;\nmsg.topic = \"Distance\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 100,
+        "wires": [
+            [
+                "6ab6000000000030"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000011",
+        "type": "file in",
+        "z": "6ab6000000000001",
+        "name": "Read angle",
+        "filename": "/tmp/lidar_angle.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "6ab6000000000021"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000021",
+        "type": "function",
+        "z": "6ab6000000000001",
+        "name": "Angle to number",
+        "func": "const text = String(msg.payload).trim();\nif (text === \"\") return null;\nconst value = Number(text);\nif (!Number.isFinite(value)) {\n    node.warn(\"Invalid number in \" + msg.filename);\n    return null;\n}\nmsg.payload = value;\nmsg.topic = \"Angle\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [
+                "6ab6000000000031"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000012",
+        "type": "file in",
+        "z": "6ab6000000000001",
+        "name": "Read x",
+        "filename": "/tmp/lidar_x.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "6ab6000000000022"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000022",
+        "type": "function",
+        "z": "6ab6000000000001",
+        "name": "X to number",
+        "func": "const text = String(msg.payload).trim();\nif (text === \"\") return null;\nconst value = Number(text);\nif (!Number.isFinite(value)) {\n    node.warn(\"Invalid number in \" + msg.filename);\n    return null;\n}\nmsg.payload = value;\nmsg.topic = \"X\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 220,
+        "wires": [
+            [
+                "6ab6000000000032"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000013",
+        "type": "file in",
+        "z": "6ab6000000000001",
+        "name": "Read y",
+        "filename": "/tmp/lidar_y.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "6ab6000000000023"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000023",
+        "type": "function",
+        "z": "6ab6000000000001",
+        "name": "Y to number",
+        "func": "const text = String(msg.payload).trim();\nif (text === \"\") return null;\nconst value = Number(text);\nif (!Number.isFinite(value)) {\n    node.warn(\"Invalid number in \" + msg.filename);\n    return null;\n}\nmsg.payload = value;\nmsg.topic = \"Y\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "6ab6000000000033"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000030",
+        "type": "ui_chart",
+        "z": "6ab6000000000001",
+        "name": "Distance bar chart",
+        "group": "6ab6000000000052",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "label": "Distance (m)",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Waiting for LIDAR data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "2",
+        "removeOlder": "2",
+        "removeOlderPoints": "240",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ab6000000000031",
+        "type": "ui_gauge",
+        "z": "6ab6000000000001",
+        "name": "Obstacle angle compass",
+        "group": "6ab6000000000052",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "gtype": "compass",
+        "title": "Obstacle angle",
+        "label": "degrees",
+        "format": "{{value | number:2}}",
+        "min": -135,
+        "max": 135,
+        "colors": [
+            "#009688",
+            "#009688",
+            "#009688"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 790,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6ab6000000000032",
+        "type": "ui_chart",
+        "z": "6ab6000000000001",
+        "name": "X coordinate chart",
+        "group": "6ab6000000000051",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "X coordinate (m) - forward positive",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Waiting for LIDAR data",
+        "dot": false,
+        "ymin": "-2.5",
+        "ymax": "2.5",
+        "removeOlder": "2",
+        "removeOlderPoints": "240",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ab6000000000033",
+        "type": "ui_chart",
+        "z": "6ab6000000000001",
+        "name": "Y coordinate chart",
+        "group": "6ab6000000000051",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "label": "Y coordinate (m) - left positive",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Waiting for LIDAR data",
+        "dot": false,
+        "ymin": "-2.5",
+        "ymax": "2.5",
+        "removeOlder": "2",
+        "removeOlderPoints": "240",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#ff7f0e",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ab6000000000040",
+        "type": "catch",
+        "z": "6ab6000000000001",
+        "name": "LIDAR file errors",
+        "scope": [
+            "6ab6000000000010",
+            "6ab6000000000011",
+            "6ab6000000000012",
+            "6ab6000000000013"
+        ],
+        "uncaught": false,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "6ab6000000000041"
+            ]
+        ]
+    },
+    {
+        "id": "6ab6000000000041",
+        "type": "debug",
+        "z": "6ab6000000000001",
+        "name": "Check L3 script and file paths",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6ab6000000000052",
+        "type": "ui_group",
+        "name": "Polar Coordinates",
+        "tab": "6ab6000000000050",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6ab6000000000051",
+        "type": "ui_group",
+        "name": "Cartesian Coordinates",
+        "tab": "6ab6000000000050",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6ab6000000000050",
+        "type": "ui_tab",
+        "name": "Lab 6 - LIDAR",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3e6532959abc5aa8",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
